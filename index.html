@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <link rel='stylesheet' href='C:\Users\ponch\Desktop\Sgmoid\style.css'>
+  <script src='C:\Users\ponch\Desktop\Sgmoid\client.js'></script>
+</head>
+<body>
+<img src="Sgmoid.png" width="250" height="200">
+<div>
+  <div class='center'>
+    <div class='title'>APTOS Diabetic Retinopathy Detector</div>
+    <p>
+      Use images of <strong>Retinas</strong> to identify the severity of Diabetic Retinopathy in the patient
+    </p>
+    <div class='content'>
+      <div class='no-display'>
+        <input id='file-input'
+               class='no-display'
+               type='file'
+               name='file'
+               accept='image/*'
+               onchange='showPicked(this)'>
+      </div>
+      <button class='choose-file-button' type='button' onclick='showPicker()'>Select Image</button>
+      <div class='upload-label'>
+        <label id='upload-label'>No file chosen</label>
+      </div>
+      <div>
+        <img id='image-picked' class='no-display' alt='Chosen Image' height='200'>
+      </div>
+      <div class='analyze'>
+        <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Find</button>
+      </div>
+      <div class='result-label'>
+        <label id='result-label'></label>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
