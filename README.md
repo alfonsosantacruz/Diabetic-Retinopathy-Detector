@@ -5,5 +5,7 @@ Link to the dataset:
 https://drive.google.com/drive/folders/1SamPBFLQO3kQsMtVqyHDbAmVd8Vw9eB5
 
 Validation accuracy of aptos.pkl in main.py ~ 89%
+main.py was deployed in Google Cloud Platform.
+The API was created and used in client.js as a POST request.
 
 Model with higher accuracy and Jupyter Notebook with fine-tuning process including progressive resizing coming soon.
