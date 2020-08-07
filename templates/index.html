@@ -1,46 +1,42 @@
-var el = x => document.getElementById(x);
-
-function showPicker() {
-  el("file-input").click();
-}
-
-function showPicked(input) {
-  el("upload-label").innerHTML = input.files[0].name;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    el("image-picked").src = e.target.result;
-    el("image-picked").className = "";
-    console.log(el("image-picked"));
-  };
-  reader.readAsDataURL(input.files[0]);
-}
-
-function analyze() {
-  var uploadFiles = el("file-input").files;
-  console.log(uploadFiles);
-  console.log(uploadFiles[0]);
-  if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
-
-  el("analyze-button").innerHTML = "Analyzing..."
-
-  var fileData = new FormData();
-  fileData.append("file", uploadFiles[0]);
-
-  var xhr = new XMLHttpRequest();
-  //var loc = window.location;
-  xhr.open("POST", 'https://link-to-your--cloud-function.cloudfunctions.net/name-of-your-cloud-function', true);
-  xhr.send(fileData);
-
-  xhr.onerror = function() {
-    alert(xhr.responseText);
-  };
-  xhr.onload = function(e) {
-    if (this.readyState === 4) {
-      var response = JSON.parse(e.target.responseText);
-      // console.log(response);
-      // console.log(response.Confidence);
-      el("result-label").innerHTML = `Result = ${response["Predicted Class"]}; Condifence = ${Math.round(response.Confidence*100, 2)}%`;
-    }
-    el("analyze-button").innerHTML = "Analyze";
-  };
-}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <link rel='stylesheet' href='../static/style.css'>
+  <script src='../static/client.js'></script>
+</head>
+<body>
+<img src="Sgmoid.png" width="250" height="200">
+<div>
+  <div class='center'>
+    <div class='title'>APTOS Diabetic Retinopathy Detector</div>
+    <p>
+      Use images of <strong>Retinas</strong> to identify the severity of Diabetic Retinopathy in the patient
+    </p>
+    <div class='content'>
+      <div class='no-display'>
+        <input id='file-input'
+               class='no-display'
+               type='file'
+               name='file'
+               accept='image/*'
+               onchange='showPicked(this)'>
+      </div>
+      <button class='choose-file-button' type='button' onclick='showPicker()'>Select Image</button>
+      <div class='upload-label'>
+        <label id='upload-label'>No file chosen</label>
+      </div>
+      <div>
+        <img id='image-picked' class='no-display' alt='Chosen Image' height='200'>
+      </div>
+      <div class='analyze'>
+        <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Find</button>
+      </div>
+      <div class='result-label'>
+        <label id='result-label'></label>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
