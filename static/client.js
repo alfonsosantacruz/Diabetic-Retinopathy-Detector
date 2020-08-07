@@ -28,8 +28,7 @@ function analyze() {
 
   var xhr = new XMLHttpRequest();
   //var loc = window.location;
-  //xhr.open("GET", "https://cors-escape.herokuapp.com/https://maximum.blog/@shalvah/posts");
-  xhr.open("POST", 'https://us-central1-blindness-detection-268613.cloudfunctions.net/aptos-API',true);    //`${loc.protocol}//${loc.hostname}:${loc.port}/analyze`,true);
+  xhr.open("POST", 'https://link-to-your--cloud-function.cloudfunctions.net/name-of-your-cloud-function', true);
   xhr.send(fileData);
 
   xhr.onerror = function() {
@@ -37,28 +36,11 @@ function analyze() {
   };
   xhr.onload = function(e) {
     if (this.readyState === 4) {
-      var response = e.target.responseText;
-      el("result-label").innerHTML = `Result = ${response}`;
+      var response = JSON.parse(e.target.responseText);
+      // console.log(response);
+      // console.log(response.Confidence);
+      el("result-label").innerHTML = `Result = ${response["Predicted Class"]}; Condifence = ${Math.round(response.Confidence*100, 2)}%`;
     }
     el("analyze-button").innerHTML = "Analyze";
   };
 }
-
-
-// Launch on terminal to eliminate CORPS problem
-// start chrome --user-data-dir="C://Chrome dev session" --disable-web-security
-
-
-  //var fileData = new FormData();
-  //console.log(uploadFiles[0]);
-  //console.log(xhr.response)
-  //fileData.append("file", uploadFiles[0]);
-  //xhr.send(fileData);
-  //xhr.onload = function(e) {
-  //  if (this.readyState === 4) {
-  //    var response = e;
-  //    el("result-label").innerHTML = `Result = ${response}`;
-  //  }
-  //  el("analyze-button").innerHTML = "Analyze";
-  //};
-//}
