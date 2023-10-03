@@ -1,5 +1,5 @@
 fastai>=1.0
-Pillow==6.2.1
+Pillow==10.0.1
 
 
 # PyTorch 1.1.0
